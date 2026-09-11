@@ -6,8 +6,8 @@
 // ================================
 // ✅ FIXED: শুধুমাত্র ২টি ক্লাসের শীট (বাকিগুলো পরে যুক্ত করবেন)
 const SHEET_CSV_URLS = [
-  "https://docs.google.com/spreadsheets/d/e/2PACX-1vTm2uenDiLu93wXEBWrAB1stf1ltmKcLQWpGMRfs1uNCgeUWeYLLmAfi0p2I1D6Lxmp8Xw-sR8bxVCn/pub?gid=30031640&single=true&output=csv",
-  "https://docs.google.com/spreadsheets/d/e/2PACX-1vRmA_P_ghMLKrBr48GYtRJWAx4iLu83Af9CHmGeKDpr6ZmdpRWF78QNUoSMIFeayRCk8m7AK8A5YpbE/pub?gid=838426032&single=true&output=csv"
+  "",
+  ""
 ];
 
 // ================================
