@@ -1,0 +1,564 @@
+/* A4 পেজ সাইজ ও প্রিন্ট অপটিমাইজেশন */
+@page {
+  size: A4 portrait;
+  margin: 0;
+}
+
+:root{
+  --green:#1a9c5b;
+  --teal-blue:#0e7fa3;
+  --gold:#f4c531;
+  --red:#e8384f;
+  --ink:#1c2b26;
+  --muted:#0a0101;
+  --bg:#eef2f0;
+  --card:#ffffff;
+  --line:#0c0f12;
+  --radius:22px;
+  --merit-blue:#0d0661;
+  --merit-gold:#d4a574;
+}
+
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;overflow-x:hidden;max-width:100%;line-height:1.3;}
+body{
+  font-family:'Hind Siliguri',sans-serif;
+  background:linear-gradient(160deg,#f4f8f6 0%,#e9f1ee 45%,#e3edea 100%);
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+}
+
+/* Hero */
+.hero{
+  background:linear-gradient(115deg,var(--green) 0%,var(--teal-blue) 100%);
+  color:#fff;
+  text-align:center;
+  padding:36px 20px 30px;
+}
+.hero-cap{margin-bottom:8px;}
+.hero-cap svg{filter:drop-shadow(0 2px 3px rgba(0,0,0,.15));}
+.hero h1{
+  font-family:'Baloo Da 2',sans-serif;
+  font-size:1.75rem;
+  font-weight:800;
+  margin:4px 0 8px;
+  text-shadow:0 1px 2px rgba(0,0,0,.1);
+}
+.hero p{
+  margin:0;
+  font-size:.95rem;
+  font-weight:500;
+  opacity:.95;
+}
+
+/* Ticker */
+.ticker{
+  display:flex;align-items:stretch;
+  overflow:hidden;
+  font-size:.85rem;
+}
+.ticker-badge{
+  background:var(--red);color:#fff;
+  padding:10px 14px;flex-shrink:0;
+  font-weight:700;white-space:nowrap;
+  display:flex;align-items:center;
+}
+.ticker-track{
+  overflow:hidden;white-space:nowrap;flex:1;
+  background:var(--gold);
+  display:flex;align-items:center;
+}
+.ticker-track span{
+  display:inline-block;padding-left:100%;
+  font-weight:700;color:#3a2a00;
+  animation:scrollLeft 20s linear infinite;
+}
+@keyframes scrollLeft{
+  0%{transform:translateX(0);}
+  100%{transform:translateX(-100%);}
+}
+
+/* Page switching */
+.page{display:none;}
+.page.active{display:block;}
+
+.btn-back{
+  display:inline-flex;align-items:center;gap:6px;
+  margin:20px 0 6px;padding:10px 18px;
+  border:1.5px solid var(--line);border-radius:12px;
+  background:#fff;color:#0f8a52;font-weight:700;font-size:.88rem;
+  font-family:'Hind Siliguri',sans-serif;cursor:pointer;
+  box-shadow:0 4px 12px rgba(20,60,50,.06);
+  transition:transform .25s cubic-bezier(.25,1,.5,1),box-shadow .25s ease,background .2s ease;
+  text-decoration:none;
+}
+.btn-back:hover{background:#0f8a52;color:#fff;border-color:#0f8a52;box-shadow:0 8px 18px rgba(15,138,82,.25);transform:translateY(-2px);}
+.btn-back:active{transform:scale(.97);}
+
+/* Layout */
+.wrap{
+  max-width:520px;
+  margin:0 auto;
+  padding:36px 16px 40px;
+}
+.wrap-report{
+  max-width:780px;
+  padding:28px 16px 40px;
+}
+.card{
+  background:var(--card);
+  border-radius:var(--radius);
+  box-shadow:0 16px 40px rgba(20,60,50,.14);
+  padding:32px 24px;
+  margin-bottom:20px;
+  border:1px solid rgba(20,60,50,.06);
+}
+.card-title{
+  font-family:'Hind Siliguri',sans-serif;
+  font-weight:700;font-size:1.3rem;
+  color:#158a4e;
+  text-align:center;margin-bottom:24px;
+}
+.star{color:var(--gold);margin-right:4px;}
+
+.field-label{
+  display:block;font-size:.82rem;font-weight:700;
+  color:var(--muted);margin:16px 0 8px;
+}
+.input{
+  width:100%;padding:15px 16px;
+  border:1.5px solid var(--line);border-radius:14px;
+  font-size:1rem;font-family:'Hind Siliguri',sans-serif;
+  background:#fbfdfc;color:var(--ink);
+  font-weight:600;
+  appearance:none;
+  -webkit-appearance:none;
+}
+select.input{
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%237a8a84' stroke-width='2'><path d='M6 9l6 6 6-6'/></svg>");
+  background-repeat:no-repeat;
+  background-position:right 14px center;
+  padding-right:38px;
+}
+.input:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 4px rgba(26,156,91,.12);}
+
+.btn-primary{
+  width:100%;margin-top:26px;padding:16px;
+  border:none;border-radius:14px;
+  background:linear-gradient(135deg,#0d8a52,#0a7a48);
+  color:#fff;font-size:1.05rem;font-weight:700;
+  font-family:'Hind Siliguri',sans-serif;
+  cursor:pointer;
+  box-shadow:0 8px 18px rgba(10,122,72,.3);
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  transition:transform .25s cubic-bezier(.25,1,.5,1),box-shadow .25s ease,filter .2s ease;
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 24px rgba(10,122,72,.4);filter:brightness(1.03);}
+.btn-primary:active{transform:scale(.98);}
+.btn-primary:disabled{opacity:.6;}
+
+.btn-primary .icon{
+  font-size:0.9rem;
+}
+
+.status-msg{
+  text-align:center;font-size:.85rem;margin:16px 0 0;
+  color:var(--red);font-weight:600;min-height:1em;
+}
+
+.result-card.hidden{display:none;}
+.result-card{padding:0;background:transparent;box-shadow:none;}
+.report-outer{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:22px;
+  box-shadow:0 16px 40px rgba(20,60,50,.14);
+}
+.report-inner{
+  border:3px solid #17a06f;
+  border-radius:14px;
+  padding:22px 28px;
+  position:relative;
+}
+
+.report-topbar{
+  display:flex;align-items:center;gap:18px;
+  margin-bottom:10px;
+}
+.photo-box{
+  flex-shrink:0;
+  width:88px;height:92px;
+  border:2px solid var(--ink);
+  border-radius:8px;
+  background:#fbfdfc;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+.photo-box img{
+  width:100%;height:100%;
+  object-fit:contain;
+  padding:4px;
+}
+.report-header{flex:1;text-align:center;min-width:0;}
+.report-header h2{
+  font-family:'Baloo Da 2',sans-serif;
+  color:#0f8a52;font-size:1.9rem;margin:0 0 4px;
+}
+.report-address{font-size:.92rem;color:#3a4a44;margin:0 0 3px;}
+.report-meta{font-size:.88rem;color:var(--muted);margin:0;font-weight:600;}
+
+.stamp-combo{
+  flex-shrink:0;
+  width:112px;
+  border:2px dashed;border-radius:50%;
+  padding:14px 8px;text-align:center;
+  line-height:1.15;
+  font-family:'JetBrains Mono',monospace;
+}
+.stamp-combo span{display:block;font-size:.62rem;font-weight:700;letter-spacing:.6px;}
+.stamp-combo strong{display:block;font-size:.92rem;letter-spacing:.3px;margin-top:1px;}
+.stamp-combo em{
+  display:block;margin-top:5px;font-style:normal;
+  font-size:.56rem;font-weight:800;letter-spacing:.2px;
+  background:var(--merit-blue);color:#fff;border-radius:5px;padding:2px 3px;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact;
+}
+.stamp-combo.pass{border-color:#17a06f;color:#0f8a52;}
+.stamp-combo.fail{border-color:var(--red);color:var(--red);}
+
+.info-block,.grade-block{display:block;}
+
+.section-title{
+  text-align:center;
+  font-family:'Baloo Da 2',sans-serif;
+  font-style:italic;
+  font-weight:700;
+  font-size:1.2rem;
+  color:var(--ink);
+  text-decoration:underline;
+  text-underline-offset:4px;
+  margin:14px 0 8px;
+}
+
+.info-table{
+  width:100%;border-collapse:collapse;
+  margin-bottom:4px;
+}
+.info-table td{
+  border:1.5px solid var(--ink);
+  padding:9px 16px;
+  width:50%;
+  vertical-align:middle;
+}
+.info-label{
+  font-size:.86rem;color:var(--muted);font-weight:700;
+  margin-right:6px;
+}
+.info-value{
+  font-size:1.05rem;color:#0f8a52;font-weight:700;
+}
+
+.table-scroll{
+  width:100%;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  margin:6px 0;
+}
+.marks-table{width:100%;min-width:0;border-collapse:collapse;font-size:.94rem;line-height:1.3;}
+.marks-table th{
+  text-align:center;background:#0f8a52;color:#fff;
+  padding:8px 6px;font-weight:700;font-size:.8rem;
+  letter-spacing:.2px;border:1px solid #0a6e3f;
+}
+.marks-table td{padding:5px 6px;border:1px solid var(--line);text-align:center;line-height:1.2;}
+.marks-table td.subj-name,.marks-table th:first-child{text-align:left;}
+.marks-table tr:nth-child(even){background:#f7fbfa;}
+.marks-table tfoot tr{font-weight:800;border-top:2px solid var(--ink);}
+.marks-table tfoot td{padding:8px 6px;border:1px solid var(--line);}
+
+.marks-table{
+  border:1.5px solid #137b59;
+  border-radius:8px;
+  overflow:hidden;
+}
+
+.cell-pass{color:#0a8a4a;font-weight:700;}
+.cell-fail{color:var(--red);font-weight:700;}
+
+.grade-scale{
+  font-size:.78rem;color:var(--muted);text-align:center;
+  margin:6px 0;line-height:1.25;
+}
+
+.remarks-box{
+  margin:6px 0;padding:12px 16px;min-height:48px;
+  border:2px solid var(--ink);
+  border-radius:9px;font-size:1rem;
+  line-height:1.3;
+}
+.remarks-box span{font-weight:700;color:var(--ink);}
+.remarks-box em{color:#3a4a44;font-style:normal;display:block;margin-top:3px;line-height:1.3;}
+
+.sign-row{
+  display:flex;justify-content:space-between;
+  margin:48px 0 4px;gap:16px;flex-wrap:wrap;
+}
+.sign-row div{
+  flex:1;min-width:110px;text-align:center;
+  font-size:.85rem;color:var(--muted);line-height:1;
+}
+.sign-line{
+  display:block;height:2px;background:var(--ink);
+  margin-bottom:8px;
+}
+
+.report-footer{
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px;
+  font-size:.7rem;color:#a3b0ab;
+  border-top:1px solid var(--line);padding-top:5px;margin-top:8px;
+}
+
+.bn-number {
+  font-family: 'Tiro Bangla', serif;
+}
+
+.result-actions{
+  display:flex;gap:10px;flex-wrap:wrap;margin-top:20px;
+}
+.result-actions .btn-primary,
+.result-actions .btn-secondary{
+  flex:1;min-width:150px;margin-top:0;
+}
+.btn-secondary{
+  padding:16px;
+  border:1.5px solid #0f8a52;border-radius:14px;
+  background:#fff;color:#0f8a52;font-size:1.05rem;font-weight:700;
+  font-family:'Hind Siliguri',sans-serif;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  transition:transform .25s cubic-bezier(.25,1,.5,1),box-shadow .25s ease,background .2s ease,color .2s ease;
+}
+.btn-secondary:hover{background:#0f8a52;color:#fff;box-shadow:0 10px 20px rgba(15,138,82,.25);transform:translateY(-2px);}
+.btn-secondary:active{transform:scale(.98);}
+
+/* -------------------------------------------------------------------------
+   DESKTOP / TABLET — on-screen only, never affects @media print below
+-------------------------------------------------------------------------- */
+@media (min-width:860px){
+  .wrap{max-width:640px;padding:56px 24px 60px;}
+  .wrap-report{max-width:860px;padding:44px 24px 60px;}
+  .card{padding:40px 40px;}
+  .card-title{font-size:1.5rem;}
+  .btn-back{font-size:.92rem;padding:11px 20px;}
+  .report-outer{padding:30px;}
+  .result-actions .btn-primary,
+  .result-actions .btn-secondary{font-size:1.02rem;}
+}
+
+/* -------------------------------------------------------------------------
+   STRICT PRINT CONFIGURATION (স্ক্রিনের হুবহু ডিজাইন এক পেজে ফিক্স করার জন্য)
+-------------------------------------------------------------------------- */
+@media print {
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  .no-print { display: none !important; }
+
+  html, body {
+    background: #fff !important;
+    width: 210mm !important;
+    height: 297mm !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .wrap, .wrap-report {
+    padding: 0 !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+  }
+
+  /* মূল কার্ডটিকে প্রিন্টে ঠিকমতো বসানোর জন্য স্কেলিং ও ফিক্সড সাইজ */
+  .report-outer, 
+  #adminPrintArea .print-page {
+    width: 210mm !important;
+    height: 297mm !important;
+    max-height: 297mm !important;
+    margin: 0 !important;
+    padding: 8mm 10mm !important;
+    box-shadow: none !important;
+    border: none !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+    overflow: hidden !important;
+  }
+
+  .report-inner {
+    width: 100% !important;
+    height: 100% !important;
+    max-height: 281mm !important;
+    border: 2px solid #168f68 !important;
+    border-radius: 12px !important;
+    padding: 14px 18px !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  .report-topbar { margin-bottom: 4px !important; flex: 0 0 auto; }
+  .info-block { margin-bottom: 2px !important; flex: 0 0 auto; }
+  .grade-block { margin-bottom: 2px !important; flex: 1 1 auto; }
+  .section-title { margin: 6px 0 4px !important; font-size: 1.05rem !important; }
+  .grade-scale { margin: 2px 0 !important; font-size: 0.7rem !important; }
+  
+  .remarks-box {
+    margin: 2px 0 !important;
+    padding: 8px 12px !important;
+    font-size: 0.88rem !important;
+    min-height: 35px !important;
+    flex: 0 0 auto;
+  }
+
+  .sign-row {
+    margin: 15px 0 2px !important;
+    flex: 0 0 auto;
+  }
+
+  .report-footer {
+    margin-top: 2px !important;
+    padding-top: 3px !important;
+    border-top: 1px solid var(--line);
+    flex: 0 0 auto;
+  }
+
+  .table-scroll { overflow: visible !important; width: 100% !important; }
+  .marks-table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    font-size: 0.82rem !important;
+  }
+  .marks-table th {
+    padding: 4px 3px !important;
+    font-size: 0.7rem !important;
+    border: 1px solid #0a6e3f !important;
+  }
+  .marks-table td {
+    padding: 3px 3px !important;
+    border: 1px solid var(--line) !important;
+  }
+  
+  .marks-table tfoot td { padding: 4px 3px !important; font-weight: 800; }
+  .card { box-shadow: none !important; }
+}
+
+.footer{text-align:center;padding:20px;font-size:.78rem;color:var(--muted);}
+
+@media (max-width:600px){
+  .report-inner{padding:16px 14px;}
+  .report-header h2{font-size:1.3rem;}
+  .report-address{font-size:.72rem;}
+  .report-meta{font-size:.68rem;}
+  .report-topbar{gap:8px;}
+  .photo-box{width:60px;height:62px;}
+  .stamp-combo{width:78px;padding:8px 5px;}
+  .stamp-combo span{font-size:.46rem;}
+  .stamp-combo strong{font-size:.66rem;}
+  .stamp-combo em{font-size:.42rem;}
+  .section-title{font-size:1rem;margin:14px 0 8px;}
+  .info-table td{padding:7px 9px;}
+  .info-label{font-size:.66rem;}
+  .info-value{font-size:.82rem;}
+  .marks-table{font-size:.66rem;}
+  .marks-table th,.marks-table td{padding:5px 3px;}
+  .remarks-box{padding:10px 12px;font-size:.78rem;}
+  .sign-row{margin-top:34px;}
+  .sign-row div{font-size:.66rem;min-width:70px;}
+  .result-actions{flex-direction:column;}
+}
+
+.hidden{display:none !important;}
+
+/* পরীক্ষার রুটিন পেইজ */
+.routine-header{text-align:center;margin-bottom:14px;}
+.routine-header h2{
+  font-family:'Baloo Da 2',sans-serif;
+  color:#0f8a52;font-size:1.5rem;margin:0 0 4px;
+}
+.routine-title{font-size:.95rem;color:var(--ink);font-weight:700;margin:0;}
+
+.routine-table{width:100%;min-width:760px;border-collapse:collapse;font-size:.78rem;line-height:1.25;}
+.routine-table th{
+  text-align:center;background:#0f8a52;color:#fff;
+  padding:8px 6px;font-weight:700;font-size:.72rem;
+  border:1px solid #0a6e3f;
+}
+.routine-table td{padding:7px 6px;border:1px solid var(--line);text-align:center;}
+.routine-table td.subj-name{font-weight:700;color:#0f8a52;background:#f7fbfa;}
+.routine-table tr:nth-child(even){background:#f7fbfa;}
+
+.routine-rules{
+  margin-top:18px;padding:14px 16px;
+  border:1.5px solid var(--ink);border-radius:6px;
+}
+.routine-rules h3{
+  font-family:'Baloo Da 2',sans-serif;
+  font-size:1rem;margin:0 0 8px;color:var(--ink);
+  text-decoration:underline;text-underline-offset:3px;
+}
+.routine-rules ol{margin:0;padding-left:20px;}
+.routine-rules li{font-size:.82rem;line-height:1.5;margin-bottom:6px;color:#3a4a44;}
+
+@media (max-width:600px){
+  .routine-header h2{font-size:1.1rem;}
+  .routine-title{font-size:.78rem;}
+  .routine-table{font-size:.68rem;}
+  .routine-table th,.routine-table td{padding:5px 4px;}
+  .routine-rules li{font-size:.72rem;}
+}
+
+#adminPrintArea{margin-top:20px;}
+.print-page{margin-bottom:24px;}
+
+.report-inner {
+  font-family: 'Hind Siliguri', sans-serif;
+}
+
+.bn-number.tiro-bangla-font {
+  font-family: 'Tiro Bangla', serif;
+  font-weight: 400;
+}
+
+.bn-number.hind-siliguri-font {
+  font-family: 'Hind Siliguri', sans-serif;
+  font-weight: 600;
+}
+
+.bn-number.baloo-da-2-font {
+  font-family: 'Baloo Da 2', sans-serif;
+  font-weight: 700;
+}
+
+.grade-block,
+.grade-block .table-scroll,
+.grade-block .marks-table,
+.grade-block .marks-table thead,
+.grade-block .marks-table tbody,
+.grade-block .marks-table tfoot,
+.grade-block .marks-table tr,
+.grade-block .marks-table th,
+.grade-block .marks-table td {
+  border-radius: 0 !important;
+}
+
+.grade-block .marks-table {
+  border:1px solid #137b59;
+  overflow: hidden;
+}

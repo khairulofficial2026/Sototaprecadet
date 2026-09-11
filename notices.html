@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>নোটিশ-লাইব্রেরী | সততা প্রি ক্যাডেট স্কুল</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@600;700;800&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --green:#16955a;
+    --green-dark:#0f7a48;
+    --ink:#1e2b28;
+    --muted:#61726c;
+    --card-border:rgba(20,60,50,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;font-family:'Hind Siliguri',sans-serif;}
+  html,body{overflow-x:hidden;max-width:100%;}
+  body{
+    background:linear-gradient(160deg,#f4f8f6 0%,#e9f1ee 45%,#e3edea 100%);
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+  }
+
+  .wrap{max-width:640px;margin:0 auto;padding:18px 16px 50px;}
+
+  .btn-back{
+    display:inline-flex;align-items:center;gap:6px;
+    margin-bottom:16px;padding:9px 16px;
+    border:1.5px solid var(--ink);border-radius:11px;
+    background:#fff;color:var(--green-dark);font-weight:700;font-size:.84rem;
+    text-decoration:none;box-shadow:0 4px 12px rgba(20,60,50,.06);
+    transition:transform .25s cubic-bezier(.25,1,.5,1),background .2s ease,color .2s ease;
+  }
+  .btn-back:hover{background:var(--green-dark);color:#fff;border-color:var(--green-dark);transform:translateY(-2px);}
+
+  .page-title{
+    font-family:'Baloo Da 2',cursive;
+    color:var(--green-dark);
+    font-size:1.3rem;
+    margin-bottom:2px;
+  }
+  .page-sub{ font-size:.82rem; color:var(--muted); font-weight:500; margin-bottom:18px; }
+
+  .notice-list{ display:flex; flex-direction:column; gap:10px; }
+
+  .notice-item{
+    display:flex; align-items:center; gap:12px;
+    background:rgba(255,255,255,.86);
+    border:1px solid var(--card-border);
+    border-radius:14px;
+    padding:14px 14px;
+    box-shadow:0 8px 20px rgba(20,60,50,.06);
+    text-decoration:none;
+    color:var(--ink);
+    transition:transform .25s cubic-bezier(.25,1,.5,1),box-shadow .25s ease,border-color .2s ease;
+  }
+  .notice-item:hover{ transform:translateY(-2px); box-shadow:0 12px 24px rgba(20,60,50,.1); border-color:var(--green); }
+
+  .notice-icon{
+    width:38px;height:38px;flex-shrink:0;border-radius:10px;
+    background:rgba(22,149,90,.12);
+    display:flex;align-items:center;justify-content:center;
+    font-size:1.05rem;
+  }
+  .notice-text{ flex:1; min-width:0; }
+  .notice-title{ font-size:.86rem; font-weight:700; line-height:1.35; }
+  .notice-date{ font-size:.72rem; color:var(--muted); font-weight:500; margin-top:2px; }
+  .notice-dl{ font-size:.78rem; font-weight:700; color:var(--green-dark); flex-shrink:0; }
+
+  .empty-msg{
+    text-align:center; font-size:.85rem; color:var(--muted);
+    padding:40px 10px; font-weight:500;
+  }
+</style>
+</head>
+<body>
+
+  <div class="wrap">
+    <a href="index.html" class="btn-back">← মূল পেইজে ফিরে যান</a>
+
+    <h1 class="page-title">📚 নোটিশ-লাইব্রেরী</h1>
+    <p class="page-sub">বিদ্যালয়ের সকল প্রকাশিত নোটিশ এখানে পাবেন</p>
+
+    <div class="notice-list" id="noticeList"></div>
+  </div>
+
+  <script src="notices-data.js"></script>
+  <script>
+    const listEl = document.getElementById("noticeList");
+
+    if (typeof NOTICES !== "undefined" && NOTICES.length > 0) {
+      listEl.innerHTML = NOTICES.map(n => `
+        <a class="notice-item" href="${n.file}" target="_blank" rel="noopener" download>
+          <div class="notice-icon">📄</div>
+          <div class="notice-text">
+            <div class="notice-title">${n.title}</div>
+            <div class="notice-date">${n.date}</div>
+          </div>
+          <div class="notice-dl">⬇️ ডাউনলোড</div>
+        </a>
+      `).join("");
+    } else {
+      listEl.innerHTML = `<p class="empty-msg">এখনো কোনো নোটিশ যোগ করা হয়নি।</p>`;
+    }
+  </script>
+
+</body>
+</html>
